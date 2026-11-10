@@ -181,9 +181,9 @@ class Interpolator1DMonotoneConvex(Interpolator1D):
                 d[i] = 0.0
 
         a = 0.5 * (d[:-1] + 2.0 * s - d[1:])
-        # admissible range for a is [0, s] if s > 0 and [2 s, s] if s < 0
+        # Admissible range for a: [0, s] if s > 0, [2 s, s] if s < 0, and {0} if s = 0.
         lo = np.where(s > 0, 0.0, 2.0 * s)
-        hi = np.where(s > 0, s, np.where(s < 0, s, 0.0))
+        hi = s
         self.a_ = np.clip(a, lo, hi)
         self.b_ = 2.0 * s - self.a_
 
